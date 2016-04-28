@@ -1,0 +1,81 @@
+module Main where
+
+import Data.Char
+
+type Tabuleiro = [String] -- ^ Tipo usado para representar tabuleiros. Cada linha do tabuleiro é composto por um conjunto de carateres.
+type Comandos = String    -- ^ Tipo usado para representar uma linha de comandos. Cada comando é associado a um carater.
+type Posicao = String     {- ^ Tipo usado para representar a posição do Robot.
+
+                               Uma posição válida deverá apresentar a seguinte estrutura @"x y ori"@ em que:
+
+                               * @x@ corresponde à posição do Robot no eixo das abcissas num dado tabuleiro. O seu valor deve ser inteiro e variar entre  0 e o número de colunas do tabuleiro (exclusive);
+                              
+                               * @y@ corresponde à posição do Robot no eixo das ordenadas num dado tabuleiro. O seu valor deve ser inteiro e variar entre o 0 e o número de linhas do tabuleiro (exclusive);
+                               
+                               * @ori@ corresponde à orientação do Robot. Pode apenas variar nos seguintes valores: "N" (Norte), "S" (Sul), "E" (Este), "O" (Oeste).
+                          -}
+
+main = do file <- getContents
+          if (checkContent file == -1) then putStrLn "OK"
+          else print (checkContent file)
+
+--verificar conteúdo do ficheiro
+checkContent :: String -> Int
+checkContent file 
+                  | (length input < 3)                                                = 1                         -- listas menores que três elementos apresentam erro na linha 1
+                  | checkTab tab (1,m) /= -1                                          = deepCheck tab (n,m) input -- verifica se existem mais linhas que o suposto
+                  | (checkTab [pos] (1,m) == -1) && (checkTab [cmds] (n,m) == -1)     = length input + 1          -- caso não existam linhas a definir posição inicial e solução
+                  | checkTab [pos] (1,m) == -1                                        = length input              -- caso não exista linha a definir posição inicial
+                  | checkPos pos (n,m) /= -1                                          = length input - 1          -- verifica se posição inicial é válida
+                  | checkCmd cmds  == False                                           = length input              -- verifica se a solução é válida
+                  | otherwise                                                         = -1                        -- mapa válido
+                    where 
+                          input = lines file
+                          tab = take (length input-2) input
+                          n  = length tab
+                          m  = length (head (tab))
+                          pos = input !! (length input -2)
+                          cmds = last input
+
+{-| "checkTab" verifica se o tabuleiro está dentro das normas especificadas:
+
+* o comprimento de todas as linhas deve ser igual
+
+* apenas deve conter números -}
+checkTab :: Tabuleiro -> (Int,Int) -> Int
+checkTab [] _ = -1
+checkTab (h:t) (n,m) | (length h == m) && (all (\ c -> isAlpha c) h) = checkTab t (n+1,m)
+                     | otherwise = n
+
+{-| "checkCmd" verifica se a sequência de comandos recebidos é válida. -}
+checkCmd :: Comandos -> Bool
+checkCmd [] = True                                                                                
+checkCmd (x:xs) | elem x "EDASL" = checkCmd xs
+                | otherwise = False
+
+{-| "checkPos" verifica se a posição dada está dentro das normas especificadas:
+
+* possui o formato @x y ori@
+
+* @x@ é maior que zero e inferior ao número de colunas
+
+* @y@ é maior que zero e inferior ao número de linhas
+
+* @ori@ corresponde a um dos quatro pontos cardeais (N,S,E,O) -}
+checkPos :: Posicao -> (Int,Int) -> Int
+checkPos pos (n,m) | tamOk && coordsOk && oriOk = -1
+	                 | otherwise = n+1
+
+             where [x,y, [ori]] = words pos
+                   tamOk = length (words pos) == 3
+                   coordsOk = ((read x  :: Int) >= 0) && ((read x :: Int) < m) && ((read y :: Int) >= 0) && ((read y :: Int) < n)
+                   oriOk = elem ori "NSEO"
+
+deepCheck :: Tabuleiro -> (Int,Int) ->  [String] -> Int
+deepCheck tab (n,m) input | (checkPos l1 (n,m) /= -1) = linha -- implica que a linha de erro pertence, efetivamente, ao tabuleiro
+                          | (checkPos l1 (n,m) == -1) && not(checkCmd l2) = (linha + 1) 
+                          | (checkPos l1 (n,m) == -1) && (checkCmd l2)    = (linha + 2)
+                          
+                            where linha = checkTab tab (1,m)
+                                  l1 = input !! (linha-1) -- linha do erro
+                                  l2 = input !! linha  -- linha a seguir ao erro

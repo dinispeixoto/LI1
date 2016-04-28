@@ -1,0 +1,60 @@
+module Main where
+
+import Data.Char
+
+main = do input <- getContents
+          if (checkContent input == -1) then putStrLn "OK"
+          else print (checkContent input)
+
+--funções responsáveis por verificar se o mapa é válido
+checkMap :: [String] -> Int -> Int
+checkMap map@(h:t) m = mapAux (1,m) map
+
+mapAux :: (Int,Int) -> [String] -> Int
+mapAux _ [] = -1
+mapAux (n,m) (h:t) | (length h == m) && (checkLetters h) = mapAux (n+1,m) t
+                   | otherwise = n
+
+checkLetters :: String -> Bool
+checkLetters [] = True
+checkLetters (h:t) = isAlpha h && checkLetters t
+
+--função responsável por verificar se os comandos são válidos
+checkCmd :: String -> Int -> Int
+checkCmd [] _ = -1                                                                                         
+checkCmd (x:xs) errValue | (x == 'S') || (x == 'L') || (x == 'D') || (x == 'E') || (x == 'A') = checkCmd xs errValue
+                         | otherwise = errValue
+
+--função responsável por verificar se a posição inicial é válida
+checkPos :: String -> (Int,Int) -> Int
+checkPos posStr (n,m) | (length (words posStr) == 3) && ((read x  :: Int) >= 0) && ((read x :: Int) < m) && ((read y :: Int) >= 0) && 
+                        ((read y :: Int) < n) && (ori == "N" || ori == "E" || ori == "S" || ori == "O") = -1
+	                    | otherwise = n+1
+	                    where [x,y,ori] = words posStr
+
+--verificar conteúdo do ficheiro
+checkContent :: String -> Int
+checkContent file 
+                  | (length l < 3) = 1 --listas menores que três elementos apresentam erro na linha 1
+                  | checkMap mapa m /= -1 = deepCheck mapa (n,m) l --verifica se existem mais linhas que o suposto
+                  | (checkMap [pos_ini] m == -1) && (checkMap [solution] m == -1) = length l + 1 --caso não existam linhas a definir posição inicial e solução
+                  | checkMap [pos_ini] m == -1 = length l --caso não exista linha a definir posição inicial
+                  | checkPos pos_ini (n,m) /= -1 = length l - 1 --verifica se posição inicial é válida
+                  | checkCmd solution (length l) /= -1 = length l --verifica se a solução é válida
+                  | otherwise = -1 -- mapa válido
+                    where 
+                          l = lines file
+                          mapa = take (length l-2) l
+                          n = length mapa
+                          m = length (head (mapa))
+                          pos_ini = head (take 1 (drop (length l-2) l))
+                          solution = head (drop (length l-1) l)
+
+deepCheck :: [String] -> (Int,Int) ->  [String] -> Int
+deepCheck mapa (n,m) l | (checkPos l1 (n,m) /= -1) = linha
+                       | (checkPos l1 (n,m) == -1) && (checkCmd l2 (linha+1) /= -1) = (linha + 1)
+                       | (checkPos l1 (n,m) == -1) && (checkCmd l2 (linha+2) == -1) = (linha + 2)
+                         where 
+                          linha = checkMap mapa m
+                          l1 = l !! (linha-1)
+                          l2 = l !! linha

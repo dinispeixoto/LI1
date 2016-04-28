@@ -1,0 +1,52 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\@writefile{toc}{\contentsline {chapter}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{2}{chapter.1}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}LightBot}{3}{chapter.2}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Imagem do jogo.}}{3}{figure.2.1}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}An\IeC {\'a}lise do problema}{4}{chapter.3}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Tarefa A}{4}{section.3.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Exemplo de um input inv\IeC {\'a}lido e respectivo output.}}{4}{figure.3.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Exemplo de um input v\IeC {\'a}lido e respectivo output.}}{5}{figure.3.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Tarefa B}{5}{section.3.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Exemplo de um input v\IeC {\'a}lido e respectivo output.}}{5}{figure.3.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Exemplo de um input inv\IeC {\'a}lido e respectivo output.}}{5}{figure.3.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Tarefa C}{6}{section.3.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Exemplo de um input inv\IeC {\'a}lido e respectivo output.}}{6}{figure.3.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Exemplo de um input v\IeC {\'a}lido e respectivo output.}}{6}{figure.3.6}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Tarefa D}{6}{section.3.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Exemplo de um input e respectivo output.}}{7}{figure.3.7}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Tarefa E}{7}{section.3.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Exemplo de um input e imagem do respectivo output.}}{7}{figure.3.8}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Desenvolvimento do projecto}{8}{chapter.4}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Tarefa A}{8}{section.4.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Tarefa B}{8}{section.4.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Tarefa C}{9}{section.4.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Tarefa D}{9}{section.4.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Tarefa E}{10}{section.4.5}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclus\IeC {\~a}o}{11}{chapter.5}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}

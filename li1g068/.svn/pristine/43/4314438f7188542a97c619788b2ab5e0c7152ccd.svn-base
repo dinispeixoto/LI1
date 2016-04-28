@@ -1,0 +1,122 @@
+module Main where
+
+import Data.Char
+import Data.List
+import Data.Maybe
+
+type Tabuleiro = [String]
+type Posicao = (Int,Int)
+type Orientacao = Char
+type Lampada = (Int,Int)
+type Cmd = Char
+
+main = do input <- getContents
+          putStrLn (setUp (lines input))
+
+
+setUp :: [String] -> String
+setUp input = checkResult result lamps
+
+              where tab = init input
+                    (pos, ori) = extractPos (words (last input))
+                    lamps = getLamps (reverse tab) (0,0)
+                    (wells,others) = partition (checkWell tab pos) lamps
+
+                    route = getRoute tab pos ori others wells
+                    result = getResult ori route
+
+
+-- ######################################################## EM BUSCA DAS LAMPADAS ###############################################################
+
+
+getRoute :: Tabuleiro -> Posicao -> Orientacao -> [Lampada] -> [Lampada] -> [(Posicao,Orientacao,Cmd)]
+getRoute _ _ _ [] [] = []
+getRoute tab pos ori [] wells = let (newWells, lamps) = splitLamps tab wells
+                                in getRoute tab pos ori lamps newWells
+
+getRoute tab pos ori lamps wells | elem pos lamps = (pos,ori,'L') : getRoute tab pos ori (delete pos lamps) wells
+                                 | route == [] = []
+                                 | otherwise = route ++ (getRoute tab posL oriL (delete posL lamps) wells)
+
+                                   where route = concat (findRoute tab [[(pos,ori,'_')]] [pos] lamps)
+                                         (posL,oriL,_) = last route                            
+
+
+findRoute :: Tabuleiro -> [[(Posicao,Orientacao,Cmd)]] -> [Posicao] -> [Lampada] -> [[(Posicao,Orientacao,Cmd)]]
+findRoute _ [] _ _ = []
+findRoute tab (h:t) checked lamps | elem pos lamps = [h++[(pos,ori,'L')]]
+                                  | paths == [] = findRoute tab t checked lamps
+                                  | otherwise = findRoute tab (t++routes) (cells++checked) lamps
+                   
+                                             where (pos,ori,cmd) = last h
+                                                   paths = getPaths tab  pos ori checked
+                                                   routes = map (\ position -> h++[position]) paths
+                                                   cells = map (\ (position,_,_) -> position) paths
+
+
+-- ####################################################### PROXIMAS POSIÇOES ##########################################################################
+
+getPaths :: Tabuleiro -> Posicao -> Orientacao -> [Posicao] -> [(Posicao,Orientacao,Cmd)]
+getPaths tab (x,y) ori chkPos = let options = [((x+1,y),'E'),((x-1,y),'O'),((x,y+1),'N'),((x,y-1),'S')]
+                                    
+                                    linhas = length tab
+                                    colunas = length (head tab)
+                                    onTab = filter (\ ((xT,yT),_) -> xT >= 0 && yT >= 0 && xT < colunas && yT < linhas) options
+                                    
+                                    withCmd = map (\ (newPos,newOri) -> (newPos,newOri,getCmd tab (x,y) newPos)) onTab
+
+                                in  filter (\ (newPos,_,cmd) -> cmd /= '!' && not (elem newPos chkPos)) withCmd
+
+
+getCmd :: Tabuleiro -> Posicao -> Posicao -> Cmd
+getCmd tab (x1,y1) (x2,y2) | cell1 > cell2 || succ cell1 == cell2 = 'S'
+                           | cell1 == cell2 = 'A'
+                           | otherwise = '!'
+                            where cell1 = toLower ((reverse tab) !! y1 !! x1)
+                                  cell2 = toLower ((reverse tab) !! y2 !! x2)
+
+
+
+-- ############################################################## LAMPADAS ###########################################################################
+
+getLamps :: Tabuleiro -> (Int,Int) -> [Lampada]
+getLamps [] _ = []
+getLamps (h:t) (n,m) = checkLine h (n,m) ++ getLamps t (n+1,0)
+
+         where checkLine [] _ = []
+               checkLine (h:t) (n,m) | isUpper h = (m,n) : checkLine t (n,m+1)
+                                     | otherwise = checkLine t (n,m+1)
+
+
+splitLamps :: Tabuleiro -> [Lampada] -> ([Lampada],[Lampada])
+splitLamps tab lamps = let shallower = maximum (map (\ (x,y) -> (reverse tab) !! y !! x) lamps)
+                           shallowest = fromJust (find (\ (x,y) -> ((reverse tab) !! y !! x) == shallower) lamps)
+                       in  partition (checkWell tab shallowest) lamps
+                                
+checkWell :: Tabuleiro -> Posicao -> Lampada -> Bool
+checkWell tab pos lamp = findRoute tab [[(lamp,'!','_')]] [lamp] [pos] == []
+
+                      
+-- ######################################################### RESULTADO FINAL ##########################################################################
+
+getResult :: Orientacao -> [(Posicao, Orientacao, Cmd)] -> String
+getResult _ [] = []
+getResult oriI ((_,oriF,cmd):t) | cmd == '_' = (changeDir oriI oriF) ++ getResult oriF t
+                                | otherwise = (changeDir oriI oriF) ++ [cmd] ++ getResult oriF t
+
+changeDir :: Orientacao -> Orientacao -> [Cmd]
+changeDir o o2 | o == o2 = [] 
+               | (o == 'S' && o2 == 'N') || (o == 'N' && o2 == 'S') || (o == 'E' && o2 == 'O') || (o == 'O' && o2 == 'E') = "DD"
+               | (o == 'N' && o2 == 'E') || (o == 'E' && o2 == 'S') || (o == 'S' && o2 == 'O') || (o == 'O' && o2 == 'N') = "D"
+               | (o == 'N' && o2 == 'O') || (o == 'O' && o2 == 'S') || (o == 'S' && o2 == 'E') || (o == 'E' && o2 == 'N') = "E"
+
+
+checkResult :: String -> [Lampada] -> String
+checkResult result lamps = let nLamps = length lamps
+                               nAcesas = length $ filter (=='L') result
+                           in if nLamps == nAcesas then result else "IMPOSSIVEL"
+
+-- ####################################################### CONVERSÃO #################################################################################
+
+extractPos :: [String] -> (Posicao,Orientacao)
+extractPos [x,y,[o]] = ( (read x :: Int, read y :: Int), o)

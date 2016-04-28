@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>Tarefa 2</title>
+<script src="http://www.x3dom.org/release/x3dom.js"></script>
+<link rel="stylesheet" href="http://www.x3dom.org/release/x3dom.css"/>
+</head>
+<body>
+<h1>SnowBot</h1>
+<p class="case">
+<X3D xmlns="http://www.web3d.org/specifications/x3d-namespace" id="boxes"
+showStat="false" showLog="false" x="0px" y="0px" width="400px" height="400px">
+<Scene>
+<Background skyColor=".83 1 1" />
+<Shape DEF="tile">
+<Box size=".98 .98 .98"/>
+<Appearance>
+<Material diffuseColor=".96 .96 1"/>
+</Appearance>
+</Shape>
+<Transform DEF="RobotT">
+<Transform DEF="cabeca" translation="0 0 .5">
+<Shape>
+<Appearance>
+<Material diffuseColor="0.96 0.96 0.96" specularColor=".5 .5 .5" />
+</Appearance>
+<Sphere radius="0.28" />
+</Shape>
+</Transform>
+<Transform DEF="corpo" translation="0 0 0">
+<Shape>
+<Appearance>
+<Material diffuseColor="0.96 0.96 0.96" specularColor=".5 .5 .5" />
+</Appearance>
+<Sphere radius="0.4" />
+</Shape>
+</Transform>
+<Transform DEF="chapeu" translation="0 0 .75" rotation="1 0 0 1.57">
+<Shape>
+<Appearance>
+<Material diffuseColor="0.129 0.129 0.129" specularColor=".5 .5 .5" />
+</Appearance>
+<Cylinder height="0.07" radius="0.3"/>
+</Shape>
+</Transform>
+<Transform DEF="chapeu2" translation="0 0 .75" rotation="1 0 0 1.57">
+<Shape>
+<Appearance>
+<Material diffuseColor="0.129 0.129 0.129" specularColor=".5 .5 .5" />
+</Appearance>
+<Cylinder height="0.5" radius= "0.2"/>
+</Shape>
+</Transform>
+<Transform DEF="nariz" translation="0 .35 .55" rotation="0 0 0 45">
+<Shape>
+<Appearance>
+<Material diffuseColor="1 0.7 0" specularColor=".5 .5 .5"/>
+</Appearance>
+<Cone height="0.2" bottomRadius="0.07"/>
+</Shape>
+</Transform>
+<Transform DEF="olho1" translation="0.13 .2 .63" rotation="1 0 0 1.57">
+<Shape>
+<Appearance>
+<Material diffuseColor="0 0 0" specularColor=".5 .5 .5"/>
+</Appearance>
+<Sphere radius="0.04"/>
+</Shape>
+</Transform>
+<Transform DEF="olho1meio" translation="0.13 0.225 0.63" rotation="1 0 0 1.57">
+<Shape>
+<Appearance>
+<Material diffuseColor="1 1 1" specularColor=".5 .5 .5"/>
+</Appearance>
+<Sphere radius="0.02"/>
+</Shape>
+</Transform>
+<Transform DEF="olho2meio" translation="-0.13 0.225 0.63" rotation="1 0 0 1.57">
+<Shape>
+<Appearance>
+<Material diffuseColor="1 1 1" specularColor=".5 .5 .5"/>
+</Appearance>
+<Sphere radius="0.02"/>
+</Shape>
+</Transform>
+<Transform DEF="olho2" translation="-0.13 0.2 0.63" rotation="1 0 0 1.57">
+<Shape>
+<Appearance>
+<Material diffuseColor="0 0 0" specularColor=".5 .5 .5"/>
+</Appearance>
+<Sphere radius="0.04"/>
+</Shape>
+</Transform>
+<Transform DEF="bola1" translation="0 0.35 0.05" rotation="1 0 0 1.57">
+<Shape>
+<Appearance>
+<Material diffuseColor="0 0 0" specularColor=".5 .5 .5"/>
+</Appearance>
+<Sphere radius="0.06"/>
+</Shape>
+</Transform>
+<Transform DEF="bola2" translation="0 .32 .2" rotation="1 0 0 1.57">
+<Shape>
+<Appearance>
+<Material diffuseColor="0 0 0" specularColor=".5 .5 .5"/>
+</Appearance>
+<Sphere radius="0.04"/>
+</Shape>
+</Transform>
+<Transform DEF="bola3" translation="0 .34 -0.1" rotation="1 0 0 1.57">
+<Shape>
+<Appearance>
+<Material diffuseColor="0 0 0" specularColor=".5 .5 .5"/>
+</Appearance>
+<Sphere radius="0.065"/>
+</Shape>
+</Transform>
+</Transform>
+<Transform translation='0 0 3'> <Shape USE="tile"/> </Transform>
+<Transform translation='0 0 2'> <Shape USE="tile"/> </Transform>
+<Transform translation='0 0 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='0 0 0'> <Shape USE="tile"/> </Transform>
+<Transform translation="1 0 2"> <Shape> <Appearance> <Material DEF="1 0" diffuseColor="0 1 1"/> </Appearance><box size=".98 .98 .98"/></Shape></Transform>
+<Transform translation='1 0 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='1 0 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='2 0 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='2 0 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='3 0 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='3 0 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='4 0 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='4 0 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='5 0 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='5 0 0'> <Shape USE="tile"/> </Transform>
+<Transform translation="6 0 2"> <Shape> <Appearance> <Material DEF="6 0" diffuseColor="0 1 1"/> </Appearance><box size=".98 .98 .98"/></Shape></Transform>
+<Transform translation='6 0 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='6 0 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='7 0 3'> <Shape USE="tile"/> </Transform>
+<Transform translation='7 0 2'> <Shape USE="tile"/> </Transform>
+<Transform translation='7 0 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='7 0 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='0 1 3'> <Shape USE="tile"/> </Transform>
+<Transform translation='0 1 2'> <Shape USE="tile"/> </Transform>
+<Transform translation='0 1 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='0 1 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='1 1 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='1 1 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='2 1 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='3 1 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='4 1 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='5 1 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='6 1 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='6 1 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='7 1 3'> <Shape USE="tile"/> </Transform>
+<Transform translation='7 1 2'> <Shape USE="tile"/> </Transform>
+<Transform translation='7 1 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='7 1 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='0 2 3'> <Shape USE="tile"/> </Transform>
+<Transform translation='0 2 2'> <Shape USE="tile"/> </Transform>
+<Transform translation='0 2 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='0 2 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='1 2 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='1 2 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='2 2 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='3 2 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='4 2 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='5 2 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='6 2 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='6 2 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='7 2 3'> <Shape USE="tile"/> </Transform>
+<Transform translation='7 2 2'> <Shape USE="tile"/> </Transform>
+<Transform translation='7 2 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='7 2 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='0 3 3'> <Shape USE="tile"/> </Transform>
+<Transform translation='0 3 2'> <Shape USE="tile"/> </Transform>
+<Transform translation='0 3 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='0 3 0'> <Shape USE="tile"/> </Transform>
+<Transform translation="1 3 2"> <Shape> <Appearance> <Material DEF="1 3" diffuseColor="0 1 1"/> </Appearance><box size=".98 .98 .98"/></Shape></Transform>
+<Transform translation='1 3 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='1 3 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='2 3 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='2 3 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='3 3 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='3 3 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='4 3 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='4 3 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='5 3 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='5 3 0'> <Shape USE="tile"/> </Transform>
+<Transform translation="6 3 2"> <Shape> <Appearance> <Material DEF="6 3" diffuseColor="0 1 1"/> </Appearance><box size=".98 .98 .98"/></Shape></Transform>
+<Transform translation='6 3 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='6 3 0'> <Shape USE="tile"/> </Transform>
+<Transform translation='7 3 3'> <Shape USE="tile"/> </Transform>
+<Transform translation='7 3 2'> <Shape USE="tile"/> </Transform>
+<Transform translation='7 3 1'> <Shape USE="tile"/> </Transform>
+<Transform translation='7 3 0'> <Shape USE="tile"/> </Transform>
+<timeSensor DEF="time" cycleInterval="22" loop="true"> </timeSensor>
+<PositionInterpolator DEF="move" key="0.0 4.5454547e-2 6.0606062e-2 7.575758e-2 9.090909e-2 0.13636364 0.18181819 0.1969697 0.21212122 0.22727273 0.27272728 0.2878788 0.3030303 0.3181818 0.36363637 0.40909094 0.42424244 0.43939397 0.4545455 0.50000006 0.5454546 0.5909092 0.6060607 0.62121224 0.63636374 0.6818183 0.72727287 0.74242437 0.75757587 0.77272743 0.818182 0.8333335 0.848485 0.86363655 0.9090911" keyValue="0 0 4 0 0 4 0.1 0.0 4.2 0.6 0.0 4.4 1 0 3 1 0 3 1 0 3 1.0 0.1 3.2 1.0 0.6 3.4 1 1 2 1 2 2 1.0 2.1 3.1 1.0 2.6 3.3 1 3 3 1 3 3 1 3 3 1.1 3.0 3.2 1.6 3.0 3.4 2 3 2 3 3 2 4 3 2 5 3 2 5.1 3.0 3.1 5.6 3.0 3.3 6 3 3 6 3 3 6 3 3 6.0 2.9 3.2 6.0 2.4 3.4 6 2 2 6 1 2 6.0 0.9 3.1 6.0 0.39999998 3.3 6 0 3 6 0 3"> </PositionInterpolator>
+<OrientationInterpolator DEF="virar" key="0.0 4.5454547e-2 0.13636364 0.18181819 0.36363637 0.40909094 0.6818183 0.72727287" keyValue="0 0 1 0.0 0 0 1 -1.57 0 0 1 -1.57 0 0 1 0.0 0 0 1 0.0 0 0 1 -1.57 0 0 1 -1.57 0 0 1 -3.14"> </OrientationInterpolator>
+<ColorInterpolator DEF="cor1 0" key="9.090909e-2 0.13636364" keyValue=".1 0 1 0 1 1"> </ColorInterpolator>
+<ColorInterpolator DEF="cor1 3" key="0.3181818 0.36363637" keyValue=".1 0 1 0 1 1"> </ColorInterpolator>
+<ColorInterpolator DEF="cor6 3" key="0.63636374 0.6818183" keyValue=".1 0 1 0 1 1"> </ColorInterpolator>
+<ColorInterpolator DEF="cor6 0" key="0.86363655 0.9090911" keyValue=".1 0 1 0 1 1"> </ColorInterpolator>
+<Route fromNode="time" fromField ="fraction_changed" toNode="cor1 0" toField="set_fraction"> </Route>
+<Route fromNode="cor1 0" fromField ="value_changed" toNode="1 0" toField="set_diffuseColor"> </Route>
+<Route fromNode="time" fromField ="fraction_changed" toNode="cor1 3" toField="set_fraction"> </Route>
+<Route fromNode="cor1 3" fromField ="value_changed" toNode="1 3" toField="set_diffuseColor"> </Route>
+<Route fromNode="time" fromField ="fraction_changed" toNode="cor6 3" toField="set_fraction"> </Route>
+<Route fromNode="cor6 3" fromField ="value_changed" toNode="6 3" toField="set_diffuseColor"> </Route>
+<Route fromNode="time" fromField ="fraction_changed" toNode="cor6 0" toField="set_fraction"> </Route>
+<Route fromNode="cor6 0" fromField ="value_changed" toNode="6 0" toField="set_diffuseColor"> </Route>
+<Route fromNode="time" fromField ="fraction_changed" toNode="move" toField="set_fraction"> </Route>
+<Route fromNode="move" fromField ="value_changed" toNode="RobotT" toField="set_translation"> </Route>
+<Route fromNode="time" fromField ="fraction_changed" toNode="virar" toField="set_fraction"> </Route>
+<Route fromNode="virar" fromField ="value_changed" toNode="RobotT" toField="set_rotation"> </Route>
+<Sound>
+<AudioClip loop='true' enabled="true" url="musica.mp3"/>
+</Sound>
+</Scene>
+</X3D>
+</p>
+<p> &nbsp; </p>
+</body>
+</html>
+

@@ -1,0 +1,57 @@
+module Main where
+
+import Data.Char
+
+type Tabuleiro = [String]
+type Comandos = String
+type Posicao = String
+
+main = do file <- getContents
+          if (checkContent file == -1) then putStrLn "OK"
+          else print (checkContent file)
+
+--verificar conteúdo do ficheiro
+checkContent :: String -> Int
+checkContent file 
+                  | (length input < 3)                                                = 1                         --listas menores que três elementos apresentam erro na linha 1
+                  | checkTab tab (1,m) /= -1                                          = deepCheck tab (n,m) input --verifica se existem mais linhas que o suposto
+                  | (checkTab [pos] (1,m) == -1) && (checkTab [cmds] (n,m) == -1)     = length input + 1          --caso não existam linhas a definir posição inicial e solução
+                  | checkTab [pos] (1,m) == -1                                        = length input              --caso não exista linha a definir posição inicial
+                  | checkPos pos (n,m) /= -1                                          = length input - 1          --verifica se posição inicial é válida
+                  | checkCmd cmds (length input) /= -1                                = length input              --verifica se a solução é válida
+                  | otherwise                                                         = -1                        -- mapa válido
+                    where 
+                          input = lines file
+                          tab = take (length input-2) input
+                          n = length tab
+                          m = length (head (tab))
+                          pos = head (take 1 (drop (length input-2) input))
+                          cmds = head (drop (length input-1) input)
+
+--funções responsáveis por verificar se o mapa é válido
+checkTab :: Tabuleiro -> (Int,Int) -> Int
+checkTab [] _ = -1
+checkTab (h:t) (n,m) | (length h == m) && (all (\ c -> isAlpha c) h) = checkTab t (n+1,m)
+                     | otherwise = n
+
+--função responsável por verificar se os comandos são válidos
+checkCmd :: Comandos -> Int -> Int
+checkCmd [] _ = -1                                                                                         
+checkCmd (x:xs) linha | (x == 'S') || (x == 'L') || (x == 'D') || (x == 'E') || (x == 'A') = checkCmd xs linha
+                      | otherwise = linhas
+
+--função responsável por verificar se a posição inicial é válida
+checkPos :: Posicao -> (Int,Int) -> Int
+checkPos pos (n,m) | (length (words pos) == 3) && ((read x  :: Int) >= 0) && ((read x :: Int) < m) && ((read y :: Int) >= 0) && ((read y :: Int) < n)
+                      && (ori == "N" || ori == "E" || ori == "S" || ori == "O") = -1
+	               | otherwise = n+1
+	                 where [x,y,ori] = words pos
+
+deepCheck :: Tabuleiro -> (Int,Int) ->  [String] -> Int
+deepCheck tab (n,m) input | (checkPos l1 (n,m) /= -1) = linha
+                          | (checkPos l1 (n,m) == -1) && (checkCmd l2 (linha+1) /= -1) = (linha + 1)
+                          | (checkPos l1 (n,m) == -1) && (checkCmd l2 (linha+2) == -1) = (linha + 2)
+                          
+                            where linha = checkTab tab (1,m)
+                                  l1 = input !! (linha-1)
+                                  l2 = input !! linha

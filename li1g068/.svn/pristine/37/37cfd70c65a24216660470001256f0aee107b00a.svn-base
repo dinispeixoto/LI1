@@ -1,0 +1,49 @@
+module Main where 
+
+import Data.Char
+import Data.List
+
+type Coord = String
+
+main = do inp <- getContents
+          putStrLn (unlines (beginFile ++ (coordenadasLinhas (init (lines inp)) (0,0)) ++ endFile)) 
+          
+coordenadasLinha :: String -> (Int,Int) -> [String]
+coordenadasLinha [] (x,y) = [] 
+coordenadasLinha (z:zs) (x,y) = coord : superiorZ coord' ++ coordenadasLinha zs (x+1,y)
+                                                   where a = show x
+                                                         b = show y
+                                                         c = show (nivel z)
+                                                         coord = (p1 ++ (a ++ " " ++ b ++ " " ++ c) ++ p2 ++ (lampadaOuNao z) ++ p3)
+                                                         coord' = a ++" "++b ++" "++(show ((nivel z)-1))
+
+
+lampadaOuNao :: Char -> String
+lampadaOuNao x | isUpper x = "tileL"
+               | otherwise = "tile"
+
+nivel :: Char -> Int
+nivel x = (ord (toLower x) - (ord 'a'))
+
+
+coordenadasLinhas :: [String] -> (Int,Int) -> [String]
+coordenadasLinhas [] (x,y) = []
+coordenadasLinhas ((z:zs):t) (x,y) = (coordenadasLinha (z:zs) (x,y)) ++ (coordenadasLinhas t (x,y+1))
+
+superiorZ :: String -> [String]
+superiorZ coord | (read z) /= -1 = (p1 ++ (x ++ " " ++ y ++ " " ++ z) ++ p2 ++ "tile" ++ p3) : superiorZ (unwords [x,y,show ((read z :: Int)-1)])
+                | (read z == -1) = []
+                 where  coord2 = words coord
+                        x = ((coord2) !! 0)
+                        y = ((coord2) !! 1)
+                        z = ((coord2) !! 2)
+
+p1 = "<Transform translation=\'"
+p2 = "\'> <Shape USE=\""
+p3 = "\"/> </Transform>"
+
+beginFile :: [String]	
+beginFile = ["<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"","\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">","<html xmlns=\"http://www.w3.org/1999/xhtml\">","<head>","<meta http-equiv=\"X-UA-Compatible\" content=\"chrome=1\" />", "<meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\" />","<title>Tarefa 2</title>","<script src=\"http://www.x3dom.org/release/x3dom.js\"></script>","<link rel=\"stylesheet\" href=\"http://www.x3dom.org/release/x3dom.css\"/>","</head>","<body>","<h1>Tabuleiro em 3D</h1>","<p class=\"case\">","<X3D xmlns=\"http://www.web3d.org/specifications/x3d-namespace\" id=\"boxes\"","showStat=\"false\" showLog=\"false\" x=\"0px\" y=\"0px\" width=\"400px\" height=\"400px\">","<Scene>","<Background skyColor=\"1 1 1\" />", "<Shape DEF=\"tile\">","<Box size=\".98 .98 .98\"/>","<Appearance>","<Material diffuseColor=\"0 1.0 1.0\"/>","</Appearance>","</Shape>","<Shape DEF=\"tileL\">", "<Box size=\".98 .98 .98\"/>","<Appearance>","<Material diffuseColor=\"0 0 1.0\"/>","</Appearance>", "</Shape>"]
+
+endFile :: [String]
+endFile = ["</Scene>","</X3D>","</p>","<p> &nbsp; </p>","</body>","</html>"]
