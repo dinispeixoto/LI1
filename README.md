@@ -24,4 +24,4 @@ Sintetiza uma sequência de comandos para que, quando possível, o *robot* acend
 
 Tarefa 5
 ----------
-Gera uma página *xhtml*, com recurso ao formato **X3DOM**, onde se pode vizualizar uma animação tridimensional do *input* dado que, como anteriormente, deve cumprir os requisitos da tarefa 1.
+Gera uma página *xhtml* onde se pode vizualizar, com recurso ao formato **X3DOM**, uma animação tridimensional do *input* dado que, como anteriormente, deve cumprir os requisitos da tarefa 1.
