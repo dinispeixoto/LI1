@@ -147,7 +147,7 @@ luz tab pos | isUpper posNivel = pos
 getPos :: Tabuleiro -> Posicao -> Nivel
 getPos tab pos = rTab !! y !! x
               
-                 where rTab = reverse tab	
+                 where rTab = reverse tab
                        x = read ((words pos) !! 0) :: Int
                        y = read ((words pos) !! 1) :: Int
 
